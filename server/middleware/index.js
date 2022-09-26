@@ -1,19 +1,18 @@
-import multer from 'multer';
-import path from 'path';
+const multer = require('multer');
+const path = require('path');
 const allowedFiles = {
   jpeg: 'jpen',
   jpg: 'jpg',
   png: 'png',
   webp: 'webp',
 };
-
 const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, callback) => {
-      callback(null, `${path.join(__dirname, 'uploads')}`);
+      callback(null, `${path.join(path.dirname(__dirname), 'uploads')}`);
     },
     filename: (req, file, callback) => {
-      callback(null, `${file.fieldname}-${Date.now()}-${file.mimetype.split('/')[1]}`);
+      callback(null, `${file.originalname}-${file.fieldname}-${Date.now()}-${file.mimetype.split('/')[1]}`);
     },
   }),
   fileFilter: (req, file, callback) => {
@@ -26,4 +25,4 @@ const upload = multer({
   },
 }).array('images', 10);
 
-export { allowedFiles, upload };
+module.exports = { allowedFiles, upload };

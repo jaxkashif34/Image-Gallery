@@ -9,3 +9,13 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Image {
+  asset_id   String    @id
+  width      Int?      @default(600)
+  height     Int?      @default(600)
+  created_at DateTime? @default(now())
+  bytes      Int?
+  secure_url String?
+  name       String?
+}
