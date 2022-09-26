@@ -87,15 +87,19 @@ app.post('/upload', upload, async (req, res) => {
   }
 });
 
+/* This is the code that is being executed when the user uploads a file. */
 app.get('/', async (req, res) => {
-  const images = await prisma.image.findMany({
-    orderBy: {
-      created_at: 'asc',
-    },
-    take: 12,
-  });
-
+  const images = await prisma.image.findMany();
   res.json({ message: 'Images max 10', data: images });
+});
+/* Deleting the image from the database. */
+app.delete('/delete-image/:id', async (req, res) => {
+  const id = req.params.id;
+  await prisma.image.delete({
+    where: {
+      id,
+    },
+  });
 });
 
 /* This is the code that is being executed when the user uploads a file. */

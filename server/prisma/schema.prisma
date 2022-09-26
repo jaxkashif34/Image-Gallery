@@ -11,7 +11,8 @@ datasource db {
 }
 
 model Image {
-  asset_id   String    @id
+  id         String    @id @default(uuid())
+  asset_id   String
   width      Int?      @default(600)
   height     Int?      @default(600)
   created_at DateTime? @default(now())
