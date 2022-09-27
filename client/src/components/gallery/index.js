@@ -9,7 +9,7 @@ const Gallery = () => {
       <div className="grid grid-cols-4 gap-x-4 gap-y-2 overflow-y-auto max-h-96 px-4 py-2 scrollbar">
         {images.length > 0 ? (
           images.map((image, i) => {
-            return <Image key={i} image={image} />;
+            return <Image key={i} image={image} i={i} />;
           })
         ) : (
           <NoImage />

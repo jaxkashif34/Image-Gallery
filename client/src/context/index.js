@@ -5,12 +5,15 @@ export const ImagesContext = createContext();
 export const ContextProvider = ({ children }) => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [imagesArray, setImagesArray] = useState([]);
   const getImages = async () => {
     setLoading(true);
-    axios.get('http://localhost:8000/').then((response) => {
+    await axios.get('http://localhost:8000/').then((response) => {
       setImages(response.data.data);
       setLoading(false);
+      setImagesArray(response.data.data.map((image) => image.secure_url));
     });
   };
 
@@ -40,7 +43,7 @@ export const ContextProvider = ({ children }) => {
 
     try {
       const response = await axios({ url: 'http://localhost:8000/upload', data, method: 'POST' });
-
+      setImagesArray([...new Set([...imagesArray, response.data.data.map((image) => image.secure_url)])]);
       setImages(response.data.data);
     } catch (e) {
       console.log(e);
@@ -56,6 +59,12 @@ export const ContextProvider = ({ children }) => {
     setImages,
     handleDelete,
     handleChange,
+    isViewerOpen,
+    setIsViewerOpen,
+    currentImage,
+    setCurrentImage,
+    imagesArray,
+    setImagesArray,
   };
 
   return <ImagesContext.Provider value={value}>{loading ? <h1>Loading...</h1> : children}</ImagesContext.Provider>;
