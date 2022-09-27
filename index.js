@@ -1,8 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const { allowedFiles, upload } = require('./middleware');
+const { allowedFiles, upload } = require('./server/middleware');
 const cors = require('cors');
-const { cloudinary } = require('./config');
+const { cloudinary } = require('./server/config');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
