@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import axios from 'axios';
 export const ImagesContext = createContext();
 
 export const ContextProvider = ({ children }) => {
@@ -10,10 +9,11 @@ export const ContextProvider = ({ children }) => {
   const [imagesArray, setImagesArray] = useState([]);
   const getImages = async () => {
     setLoading(true);
-    await axios.get('http://localhost:8000/').then((response) => {
-      setImages(response.data.data);
+    await fetch('http://localhost:8000/').then(async (response) => {
+      const data = await response.json();
+      setImages(data.data);
       setLoading(false);
-      setImagesArray(response.data.data.map((image) => image.secure_url));
+      setImagesArray(data.data.map((image) => image.secure_url));
     });
   };
 
@@ -22,7 +22,7 @@ export const ContextProvider = ({ children }) => {
       return image.id !== id;
     });
     setImages(updatedlist);
-    await axios({ url: `http://localhost:8000/delete-image/${id}`, method: 'DELETE' });
+    await fetch(`http://localhost:8000/delete-image/${id}`, { method: 'DELETE' });
   };
 
   const handleChange = async (e) => {
@@ -42,9 +42,10 @@ export const ContextProvider = ({ children }) => {
     });
 
     try {
-      const response = await axios({ url: 'http://localhost:8000/upload', data, method: 'POST' });
-      setImagesArray([...new Set([...imagesArray, response.data.data.map((image) => image.secure_url)])]);
-      setImages(response.data.data);
+      const response = await fetch('http://localhost:8000/upload', { body: data, method: 'POST' });
+      const datainjson = await response.json();
+      setImagesArray([...new Set([...imagesArray, datainjson.data.map((image) => image.secure_url)])]);
+      setImages((prev) => [...prev, ...datainjson.data]);
     } catch (e) {
       console.log(e);
     }
