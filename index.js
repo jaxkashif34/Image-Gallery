@@ -4,6 +4,7 @@ const { allowedFiles, upload } = require('./server/middleware');
 const cors = require('cors');
 const { cloudinary } = require('./server/config');
 const { PrismaClient } = require('@prisma/client');
+const path = require('path');
 const prisma = new PrismaClient();
 
 dotenv.config();
@@ -101,6 +102,14 @@ app.delete('/delete-image/:id', async (req, res) => {
     },
   });
 });
+
+/* This is the code that is being executed when the user uploads a file. */
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 /* This is the code that is being executed when the user uploads a file. */
 const port = process.env.PORT || 8000;

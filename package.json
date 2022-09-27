@@ -1,9 +1,10 @@
 {
-  "name": "new-folder",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
