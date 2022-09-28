@@ -103,13 +103,6 @@ app.delete('/delete-image/:id', async (req, res) => {
   });
 });
 
-/* This is the code that is being executed when the user uploads a file. */
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client', 'build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-  });
-}
 
 /* This is the code that is being executed when the user uploads a file. */
 const port = process.env.PORT || 8000;
