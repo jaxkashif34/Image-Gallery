@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("postgresql-reticulated-78166")
 }
 
 model Image {
