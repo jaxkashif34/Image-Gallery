@@ -4,12 +4,9 @@ const { allowedFiles, upload } = require('./server/middleware');
 const cors = require('cors');
 const { cloudinary } = require('./server/config');
 const { PrismaClient } = require('@prisma/client');
-const path = require('path');
 const prisma = new PrismaClient();
-
 dotenv.config();
 const app = express();
-
 app.use(cors());
 
 /* This is the code that is being executed when the user uploads a file. */
@@ -20,11 +17,9 @@ app.post('/upload', upload, async (req, res) => {
   }
   /* This is the options object that is being passed to the cloudinary.uploader.upload method. */
   const options = {
-    use_filename: true,
     unique_filename: false,
     overwrite: true,
   };
-
   try {
     /**
      * It uploads images to cloudinary and returns a promise that resolves to an array of images
@@ -34,7 +29,7 @@ app.post('/upload', upload, async (req, res) => {
       return new Promise((resolve, reject) => {
         const images = [];
         files.forEach((file) => {
-          cloudinary.uploader.upload(file.path, options, (err, result) => {
+          cloudinary.uploader.upload(file.path, { ...options, public_id: `image-gallery/${file.originalname}` }, (err, result) => {
             if (err) {
               reject(err);
             }
@@ -102,7 +97,6 @@ app.delete('/delete-image/:id', async (req, res) => {
     },
   });
 });
-
 
 /* This is the code that is being executed when the user uploads a file. */
 const port = process.env.PORT || 8000;

@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import ImagePreview from 'react-simple-image-viewer';
 import { ImagesContext } from '../../context';
 const ImaveViewer = () => {
-  const { setIsViewerOpen, currentImage, setCurrentImage, imagesArray } = useContext(ImagesContext);
+  const { setIsViewerOpen, currentImage, setCurrentImage, imagesUrls } = useContext(ImagesContext);
 
-  console.log({ currentImage, setCurrentImage, imagesArray });
+  console.log({ currentImage, setCurrentImage, imagesUrls });
   return (
     <>
       <ImagePreview
-        src={imagesArray}
+        src={imagesUrls}
         onClose={() => {
           setIsViewerOpen(false);
           setCurrentImage(0);

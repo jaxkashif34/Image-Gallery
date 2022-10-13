@@ -6,22 +6,23 @@ export const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-  const [imagesArray, setImagesArray] = useState([]);
+  const [imagesUrls, setImagesUrls] = useState([]);
   const getImages = async () => {
     setLoading(true);
     await fetch('http://localhost:8000/').then(async (response) => {
       const data = await response.json();
       setImages(data.data);
       setLoading(false);
-      setImagesArray(data.data.map((image) => image.secure_url));
+      setImagesUrls(data.data.map((image) => image.secure_url));
     });
   };
-
   const handleDelete = async (id) => {
     const updatedlist = images.filter((image) => {
       return image.id !== id;
     });
     setImages(updatedlist);
+    const getTheUrls = updatedlist.map((image) => image.secure_url);
+    setImagesUrls(getTheUrls);
     await fetch(`http://localhost:8000/delete-image/${id}`, { method: 'DELETE' });
   };
 
@@ -44,7 +45,7 @@ export const ContextProvider = ({ children }) => {
     try {
       const response = await fetch('http://localhost:8000/upload', { body: data, method: 'POST' });
       const datainjson = await response.json();
-      setImagesArray([...new Set([...imagesArray, datainjson.data.map((image) => image.secure_url)])]);
+      setImagesUrls(...new Set([...imagesUrls, datainjson.data.map((image) => image.secure_url)]));
       setImages((prev) => [...prev, ...datainjson.data]);
     } catch (e) {
       console.log(e);
@@ -57,15 +58,13 @@ export const ContextProvider = ({ children }) => {
 
   const value = {
     images,
-    setImages,
     handleDelete,
     handleChange,
     isViewerOpen,
     setIsViewerOpen,
     currentImage,
     setCurrentImage,
-    imagesArray,
-    setImagesArray,
+    imagesUrls,
   };
 
   return <ImagesContext.Provider value={value}>{loading ? <h1>Loading...</h1> : children}</ImagesContext.Provider>;
