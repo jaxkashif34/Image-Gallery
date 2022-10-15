@@ -27,27 +27,19 @@ An Amazing Image Gallery where you can upload images, delete and Update Images..
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kashif-ali-ba8241196/)
 [![GitHub Badge](https://img.shields.io/badge/-jaxkashif34-black?style=flat-square&logo=github&logoColor=white&link=https://github.com/jaxkashif34)](https://github.com/jaxkashif34)
 
-## Installation
+## Installation & Starting Server
 
 Install Image-Gallery with npm
 
 # Front-End
 
 ```bash
-  clone this repo
+  clone Image-Gallery
   cd Image-Gallery
-  cd client
-  npm install
-  npm start
-```
-# Back-End
-
-```bash
-  clone this repo
-  cd Image-Gallery
-  cd server
-  npm install
-  npm run dev
+  npm install (install the server dependancies)
+  cd client 
+  npm install (install the client dependancies)
+  npm start (in the root folder)
 ```
 ## Screenshots
 
