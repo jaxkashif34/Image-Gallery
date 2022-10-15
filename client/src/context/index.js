@@ -51,7 +51,8 @@ export const ContextProvider = ({ children }) => {
     try {
       const response = await fetch('http://localhost:8000/upload', { body: data, method: 'POST' });
       const datainjson = await response.json();
-      setImagesUrls(...new Set([...imagesUrls, datainjson.data.map((image) => image.secure_url)]));
+      const newUrls = datainjson.data.map((image) => image.secure_url);
+      setImagesUrls((prev) => [...prev, ...newUrls]);
       setImages((prev) => [...prev, ...datainjson.data]);
       setLoading(false);
     } catch (e) {
