@@ -4,7 +4,7 @@ An Amazing Image Gallery where you can upload images, delete and Update Images..
 
 ## Features
 
-- Live previews
+- [Live Preview](https://awesome-image-gallery.herokuapp.com/)
 - Fullscreen mode
 - Cross platform
 - Completely Responsive
