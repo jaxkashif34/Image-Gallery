@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "cd client && npm run deploy",
-    "dev": "node index.js"
+    "start-server": "nodemon index.js",
+    "dev":"cd client && npm run deploy"
   },
   "keywords": [],
   "author": "",

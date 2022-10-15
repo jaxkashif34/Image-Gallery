@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
+import Loader from '../components/loader';
 export const ImagesContext = createContext();
 
 export const ContextProvider = ({ children }) => {
@@ -31,6 +32,7 @@ export const ContextProvider = ({ children }) => {
   };
 
   const handleChange = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const files = e.target.files;
     const images = Object.keys(files).map((key) => {
@@ -51,6 +53,7 @@ export const ContextProvider = ({ children }) => {
       const datainjson = await response.json();
       setImagesUrls(...new Set([...imagesUrls, datainjson.data.map((image) => image.secure_url)]));
       setImages((prev) => [...prev, ...datainjson.data]);
+      setLoading(false);
     } catch (e) {
       console.log(e);
     }
@@ -71,5 +74,5 @@ export const ContextProvider = ({ children }) => {
     imagesUrls,
   };
 
-  return <ImagesContext.Provider value={value}>{loading ? <h1>Loading...</h1> : children}</ImagesContext.Provider>;
+  return <ImagesContext.Provider value={value}>{loading ? <Loader loading={loading} /> : children}</ImagesContext.Provider>;
 };
