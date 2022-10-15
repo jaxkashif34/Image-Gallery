@@ -29,10 +29,6 @@ An Amazing Image Gallery where you can upload images, delete and Update Images..
 
 ## Installation & Starting Server
 
-Install Image-Gallery with npm
-
-# Front-End
-
 ```bash
   clone Image-Gallery
   cd Image-Gallery
