@@ -1,15 +1,15 @@
-const express = require('express');
 const dotenv = require('dotenv');
+dotenv.config({ path: '../.env' });
+const express = require('express');
 const { allowedFiles, upload } = require('./middleware');
 const cors = require('cors');
 const { cloudinary } = require('./config');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-dotenv.config();
 const app = express();
 app.use(cors());
 const path = require('path');
-app.use(express.static(path.join(path.dirname(__dirname), "build")));
+app.use(express.static(path.join(__dirname, '../build')));
 
 /* This is the code that is being executed when the user uploads a file. */
 app.post('/upload', upload, async (req, res) => {
