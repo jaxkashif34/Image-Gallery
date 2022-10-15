@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config({ path: '../.env' });
+dotenv.config();
 const express = require('express');
 const { allowedFiles, upload } = require('./server/middleware');
 const cors = require('cors');
