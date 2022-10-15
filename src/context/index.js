@@ -10,7 +10,7 @@ export const ContextProvider = ({ children }) => {
   const [imagesUrls, setImagesUrls] = useState([]);
   const getImages = async () => {
     setLoading(true);
-    await fetch('http://localhost:8000/api')
+    await fetch('https://awesome-image-gallery.herokuapp.com/api')
       .then(async (response) => {
         const data = await response.json();
         setImages(data.data);
