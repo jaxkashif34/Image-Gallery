@@ -83,6 +83,7 @@ app.post('/upload', upload, async (req, res) => {
       });
   } catch (e) {
     console.log(e);
+    res.send({ error: e });
   }
 });
 
