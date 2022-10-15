@@ -18,6 +18,7 @@ export const ContextProvider = ({ children }) => {
         setImagesUrls(data.data.map((image) => image.secure_url));
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err);
       });
   };
