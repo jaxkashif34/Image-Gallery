@@ -29,7 +29,7 @@ export const ContextProvider = ({ children }) => {
     setImages(updatedlist);
     const getTheUrls = updatedlist.map((image) => image.secure_url);
     setImagesUrls(getTheUrls);
-    await fetch(`http://localhost:8000/delete-image/${id}`, { method: 'DELETE' });
+    await fetch(`https://awesome-image-gallery.herokuapp.com/delete-image/${id}`, { method: 'DELETE' });
   };
 
   const handleChange = async (e) => {
@@ -50,7 +50,7 @@ export const ContextProvider = ({ children }) => {
     });
 
     try {
-      const response = await fetch('http://localhost:8000/upload', { body: data, method: 'POST' });
+      const response = await fetch('https://awesome-image-gallery.herokuapp.com/upload', { body: data, method: 'POST' });
       const datainjson = await response.json();
       const newUrls = datainjson.data.map((image) => image.secure_url);
       setImagesUrls((prev) => [...prev, ...newUrls]);
