@@ -23,9 +23,9 @@
   },
   "scripts": {
     "start-client": "react-scripts start",
-    "start": "npx prisma migrate deploy cd server &&  node index.js",
+    "start": "npx prisma migrate deploy &&  node index.js",
     "build": "react-scripts build",
-    "dev": "cd server && nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "prisma": {
     "schema": "server/prisma/schema.prisma"
