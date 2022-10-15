@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start-client": "react-scripts start",
-    "start": "cd server &&  node index.js",
+    "start": "npx prisma migrate deploy cd server &&  node index.js",
     "build": "react-scripts build",
     "dev": "cd server && nodemon index.js"
   },
