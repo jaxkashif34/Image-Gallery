@@ -9,12 +9,16 @@ export const ContextProvider = ({ children }) => {
   const [imagesUrls, setImagesUrls] = useState([]);
   const getImages = async () => {
     setLoading(true);
-    await fetch('http://localhost:8000/').then(async (response) => {
-      const data = await response.json();
-      setImages(data.data);
-      setLoading(false);
-      setImagesUrls(data.data.map((image) => image.secure_url));
-    });
+    await fetch('http://localhost:8000/api')
+      .then(async (response) => {
+        const data = await response.json();
+        setImages(data.data);
+        setLoading(false);
+        setImagesUrls(data.data.map((image) => image.secure_url));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const handleDelete = async (id) => {
     const updatedlist = images.filter((image) => {

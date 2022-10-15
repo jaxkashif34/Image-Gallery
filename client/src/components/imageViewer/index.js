@@ -3,8 +3,6 @@ import ImagePreview from 'react-simple-image-viewer';
 import { ImagesContext } from '../../context';
 const ImaveViewer = () => {
   const { setIsViewerOpen, currentImage, setCurrentImage, imagesUrls } = useContext(ImagesContext);
-
-  console.log({ currentImage, setCurrentImage, imagesUrls });
   return (
     <>
       <ImagePreview

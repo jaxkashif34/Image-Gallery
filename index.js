@@ -8,6 +8,8 @@ const prisma = new PrismaClient();
 dotenv.config();
 const app = express();
 app.use(cors());
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 /* This is the code that is being executed when the user uploads a file. */
 app.post('/upload', upload, async (req, res) => {
@@ -76,6 +78,7 @@ app.post('/upload', upload, async (req, res) => {
         });
       })
       .catch((e) => {
+        console.log(e);
         res.send(e.message);
       });
   } catch (e) {
@@ -83,8 +86,8 @@ app.post('/upload', upload, async (req, res) => {
   }
 });
 
-/* This is the code that is being executed when the user uploads a file. */
-app.get('/', async (req, res) => {
+/* This is the code that is being executed when the user make a request on /api path */
+app.get('/api', async (req, res) => {
   const images = await prisma.image.findMany();
   res.json({ message: 'Images max 10', data: images });
 });
@@ -99,5 +102,5 @@ app.delete('/delete-image/:id', async (req, res) => {
 });
 
 /* This is the code that is being executed when the user uploads a file. */
-const port = process.env.PORT || 8000;
-app.listen(port, () => console.log(`Server is up on http://localhost:${port}`));
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => console.log(`Server is up on http://localhost:${PORT}`));
