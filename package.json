@@ -16,7 +16,7 @@
     "@iconify/react": "^4.0.0"
   },
   "scripts": {
-    "start": "npm run build && cd server && npm run dev",
+    "start": "npm run build && cd server && npm run start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
