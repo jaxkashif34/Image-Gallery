@@ -9,7 +9,10 @@ const prisma = new PrismaClient();
 const app = express();
 app.use(cors());
 const path = require('path');
-app.use(express.static(path.join(__dirname, 'build')));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'build')));
+}
 
 /* This is the code that is being executed when the user uploads a file. */
 app.post('/upload', upload, async (req, res) => {
