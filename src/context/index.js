@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import Loader from '../components/loader';
 export const ImagesContext = createContext();
-
+const API_RROUTE = process.env.REACT_APP_NODE_ENV === "development" ? "http://localhost:8000" : process.env.REACT_APP_API_RROUTE;
 export const ContextProvider = ({ children }) => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +10,7 @@ export const ContextProvider = ({ children }) => {
   const [imagesUrls, setImagesUrls] = useState([]);
   const getImages = async () => {
     setLoading(true);
-    await fetch('https://awesome-image-gallery.herokuapp.com/api')
+    await fetch(`${API_RROUTE}/api`)
       .then(async (response) => {
         const data = await response.json();
         setImages(data.data);
@@ -29,7 +29,7 @@ export const ContextProvider = ({ children }) => {
     setImages(updatedlist);
     const getTheUrls = updatedlist.map((image) => image.secure_url);
     setImagesUrls(getTheUrls);
-    await fetch(`https://awesome-image-gallery.herokuapp.com/delete-image/${id}`, { method: 'DELETE' });
+    await fetch(`${API_RROUTE}/delete-image/${id}`, { method: 'DELETE' });
   };
 
   const handleChange = async (e) => {
@@ -50,7 +50,7 @@ export const ContextProvider = ({ children }) => {
     });
 
     try {
-      const response = await fetch('https://awesome-image-gallery.herokuapp.com/upload', { body: data, method: 'POST' });
+      const response = await fetch(`${API_RROUTE}/upload`, { body: data, method: 'POST' });
       const datainjson = await response.json();
       const newUrls = datainjson.data.map((image) => image.secure_url);
       setImagesUrls((prev) => [...prev, ...newUrls]);

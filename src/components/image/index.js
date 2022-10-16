@@ -23,7 +23,7 @@ const Image = ({ image, i }) => {
           }}>
           preview
         </span>
-        <span className="text-gray-50 text-sm font-semibold select-none transition absolute bottom-1  hover:text-gray-300 ">{date}</span>
+        <span className="text-gray-50 text-sm font-semibold select-none transition absolute bottom-1  hover:text-gray-300">{date}</span>
       </span>
     </div>
   );
