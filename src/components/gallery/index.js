@@ -6,7 +6,7 @@ const Gallery = () => {
   const { images } = useContext(ImagesContext);
   return (
     <div className=" p-3 max-w-6xl mx-auto my-3 rounded-lg shadow-lg ">
-      <div className="grid grid-cols-1 h-screen md:grid-cols-4 gap-x-4 gap-y-2 overflow-y-auto max-h-96 px-4 py-2 scrollbar">
+      <div className="grid grid-cols-1 h-screen md:grid-cols-4 gap-x-4 gap-y-2 overflow-y-auto max-h-96 px-4 py-2 scrollbar items-center">
         {images.length > 0 ? (
           images.map((image, i) => {
             return <Image key={i} image={image} i={i} />;
