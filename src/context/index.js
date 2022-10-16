@@ -41,7 +41,7 @@ export const ContextProvider = ({ children }) => {
     });
 
     if (images.length > 10) {
-      alert(`you can select only 10 images but ${images.length} images were selected`);
+      alert(`you can select only 10 images but ${images.length} images were selected `);
       return;
     }
     const data = new FormData();
